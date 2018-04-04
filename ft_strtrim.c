@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: galemair <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/03 16:19:57 by galemair          #+#    #+#             */
+/*   Updated: 2018/04/04 14:03:01 by galemair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static size_t	get_size(char const *s)
+static size_t		get_size(char const *s)
 {
 	size_t len;
 	size_t i;
@@ -13,7 +25,8 @@ static size_t	get_size(char const *s)
 	while (s[i])
 	{
 		j = 0;
-		while (s[i + j] == ' ' || s[i + j] == '\n' || s[i + j] == '\t' || s[i + j] == '\0')
+		while (s[i + j] == ' ' || s[i + j] == '\n'
+				|| s[i + j] == '\t' || s[i + j] == '\0')
 		{
 			if (s[i + j] == '\0')
 				return (len);
@@ -25,7 +38,7 @@ static size_t	get_size(char const *s)
 	return (len);
 }
 
-char		*ft_strtrim(char const *s)
+char				*ft_strtrim(char const *s)
 {
 	char	*str;
 	size_t	size;
@@ -34,8 +47,10 @@ char		*ft_strtrim(char const *s)
 
 	i = 0;
 	j = 0;
+	if (!s)
+		return (NULL);
 	size = get_size(s);
-	if ((str = ft_strnew(size + 1)) == NULL)
+	if ((str = ft_strnew(size)) == NULL)
 		return (NULL);
 	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
 		i++;

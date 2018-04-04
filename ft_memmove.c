@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: galemair <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/03 16:15:38 by galemair          #+#    #+#             */
+/*   Updated: 2018/04/03 20:04:22 by galemair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
@@ -5,7 +17,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	char	*c_dest;
 	char	*c_src;
 	size_t	i;
-	int	from;
+	int		from;
 
 	i = 0;
 	c_src = (char *)src;
@@ -22,4 +34,4 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		i++;
 	}
 	return (dest);
-}	
+}

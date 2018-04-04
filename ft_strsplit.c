@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: galemair <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/03 16:19:33 by galemair          #+#    #+#             */
+/*   Updated: 2018/04/04 13:39:13 by galemair         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_get_tab(char const *s, char c, char ***tab)
 {
-	char 	**tmp;
+	char	**tmp;
 	size_t	i;
 	size_t	count;
 
@@ -21,17 +33,19 @@ static int	ft_get_tab(char const *s, char c, char ***tab)
 		i++;
 	}
 	if ((tmp = malloc(sizeof(char*) * (count + 1))) == NULL)
-		return (0);
+		return (-1);
 	*tab = tmp;
 	return (count);
 }
+
 static char	*ft_fill_str(char const *s, size_t i, size_t size)
 {
 	char	*str;
 	size_t	j;
 
 	j = 0;
-	str = ft_strnew((size) + 1);
+	if ((str = ft_strnew((size))) == NULL)
+		return (NULL);
 	while (j < size)
 	{
 		str[j] = s[i];
@@ -40,19 +54,14 @@ static char	*ft_fill_str(char const *s, size_t i, size_t size)
 	}
 	return (str);
 }
-char		**ft_strsplit(char const *s, char c)
-{
-	size_t	i;
-	size_t	j;
-	char	**tab;
-	size_t	split;
-	size_t	words;
 
-	if (!s)
-		return (NULL);
-	tab = NULL;
+static char	**fill_tab(char **tab, size_t split, char const *s, char c)
+{
+	size_t		j;
+	size_t		i;
+	size_t		words;
+
 	words = 0;
-	split = ft_get_tab(s, c, &tab);
 	i = 0;
 	while (s[i] == c)
 		i++;
@@ -69,4 +78,17 @@ char		**ft_strsplit(char const *s, char c)
 	}
 	tab[words] = NULL;
 	return (tab);
+}
+
+char		**ft_strsplit(char const *s, char c)
+{
+	char	**tab;
+	size_t	split;
+
+	if (!s)
+		return (NULL);
+	tab = NULL;
+	if ((split = ft_get_tab(s, c, &tab)) == -1)
+		return (NULL);
+	return (fill_tab(tab, split, s, c));
 }
